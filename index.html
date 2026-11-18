@@ -3,373 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kuis Usaha dan Energi - IPA Kelas 8</title>
+<title>Kuis IPA Kelas 8 — Usaha dan Energi</title>
 <style>
-:root{
-  --primary:#2563eb; --primary2:#1d4ed8; --bg:#f1f5f9; --card:#fff;
-  --text:#172033; --muted:#64748b; --line:#dbe3ef; --success:#15803d;
-  --danger:#dc2626; --warning:#b45309;
-}
+:root{--navy:#17324d;--blue:#2463a6;--pale:#eef5fc;--ink:#203040;--muted:#64748b;--green:#16835d;--red:#b42318;--gold:#a86608}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eff6ff,#f8fafc 45%,#eef2ff);color:var(--text);line-height:1.55}
-.container{max-width:1050px;margin:auto;padding:28px 18px 50px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 35px rgba(15,23,42,.08);padding:28px}
-.hidden{display:none!important}
-h1,h2,h3{line-height:1.25}
-.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb 60%,#38bdf8);color:#fff;border:0;overflow:hidden}
-.hero h1{font-size:clamp(25px,4vw,40px);margin:8px 0}
-.hero p{margin:6px 0;opacity:.95}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.badge{background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.3);padding:6px 11px;border-radius:999px;font-size:13px}
-.section-title{margin:28px 0 14px}
-label{font-weight:700;font-size:14px;display:block;margin-bottom:7px}
-input[type=text]{width:100%;padding:12px 13px;border:1px solid #cbd5e1;border-radius:10px;font-size:15px;outline:none}
-input[type=text]:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-button{border:0;border-radius:10px;padding:12px 18px;font-size:15px;font-weight:700;cursor:pointer}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary2)}
-.btn-secondary{background:#e2e8f0;color:#1e293b}
-.btn-danger{background:#dc2626;color:#fff}
-.instructions{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:18px 0}
-.instructions li{margin:6px 0}
-.topbar{position:sticky;top:0;z-index:10;background:rgba(248,250,252,.96);backdrop-filter:blur(10px);padding:10px 0;border-bottom:1px solid var(--line)}
-.progress-wrap{max-width:1050px;margin:auto;padding:0 18px;display:flex;gap:12px;align-items:center}
-.progress{height:10px;background:#e2e8f0;border-radius:999px;flex:1;overflow:hidden}
-.progress-bar{height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4);width:0%;transition:.25s}
-.timer{font-weight:800;color:#0f172a;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px;min-width:105px;text-align:center}
-.timer.warning{color:var(--warning);border-color:#f59e0b;background:#fffbeb}
-.timer.danger{color:var(--danger);border-color:#ef4444;background:#fef2f2}
-.quiz-header{display:flex;justify-content:space-between;gap:15px;align-items:center;margin:22px 0 12px}
-.question-card{margin-top:15px}
-.q-number{display:inline-block;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:800}
-.q-title{font-size:20px;margin:14px 0 18px}
-.illustration{background:#f8fafc;border:1px solid #dbe3ef;border-radius:14px;padding:10px;margin:0 0 18px;text-align:center}
-.illustration svg{max-width:100%;height:auto;display:block;margin:auto}
-.caption{font-size:12px;color:var(--muted);margin-top:5px}
-.options{display:grid;gap:10px}
-.option{display:flex;align-items:flex-start;gap:12px;border:1px solid #d8e0eb;border-radius:12px;padding:13px;cursor:pointer;background:#fff;transition:.15s}
-.option:hover{border-color:#93c5fd;background:#f8fbff}
-.option input{margin-top:4px;accent-color:var(--primary)}
-.option.selected{border-color:#60a5fa;background:#eff6ff}
-.option-label{font-weight:600}
-.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
-.note{color:var(--muted);font-size:13px}
-.result{text-align:center}
-.score-circle{width:145px;height:145px;border-radius:50%;margin:18px auto;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:grid;place-items:center;border:8px solid #fff;box-shadow:0 8px 25px rgba(37,99,235,.18)}
-.score-circle strong{font-size:34px;color:#1d4ed8}
-.review{text-align:left;margin-top:25px}
-.review-item{border:1px solid var(--line);border-radius:13px;padding:17px;margin:12px 0;background:#fff}
-.correct{border-left:5px solid #22c55e}
-.incorrect{border-left:5px solid #ef4444}
-.answer{font-weight:700;margin-top:8px}
-.explanation{background:#f8fafc;border-radius:9px;padding:10px;margin-top:8px;font-size:14px}
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px}
-@media(max-width:700px){
- .form-grid{grid-template-columns:1fr}
- .card{padding:19px}
- .quiz-header{align-items:flex-start;flex-direction:column}
- .q-title{font-size:18px}
- .progress-wrap{padding:0 10px}
-}
-@media print{
- body{background:#fff}
- .topbar,.actions,.nav,.hero,.instructions{display:none!important}
- .container{max-width:none;padding:0}
- .card{box-shadow:none;border:0;padding:0}
- .review-item{break-inside:avoid}
-}
+body{margin:0;background:#f3f6fa;color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,#17324d,#2463a6);color:#fff;padding:26px 18px}
+.header-inner{max-width:1050px;margin:auto}
+header h1{margin:0 0 5px;font-size:clamp(1.5rem,3vw,2.15rem)}
+header p{margin:0;opacity:.9}
+main{max-width:1050px;margin:24px auto;padding:0 16px 40px}
+.panel,.question,.result-card{background:#fff;border:1px solid #e1e8f0;border-radius:16px;padding:22px;box-shadow:0 5px 18px #1b35500b;margin-bottom:18px}
+h2{margin:0 0 12px;color:var(--navy);font-size:1.3rem}
+label{display:block;font-weight:650;margin:12px 0 5px}
+input[type=text]{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;background:var(--blue);color:#fff}
+button:hover{filter:brightness(.94)}
+button:disabled{opacity:.55;cursor:not-allowed}
+.secondary{background:#e8eef5;color:var(--navy)}
+.danger{background:var(--red)}
+.note{font-size:.93rem;color:var(--muted)}
+.notice{background:#fff8e8;border:1px solid #f2d59b;padding:12px 14px;border-radius:10px;margin:14px 0}
+.camera-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px}
+video{width:190px;max-width:100%;aspect-ratio:4/3;object-fit:cover;background:#111;border-radius:12px;border:2px solid #dbe4ee}
+.status{font-size:.9rem;color:var(--green);font-weight:700}
+#quizArea{display:none}
+.sticky{position:sticky;top:0;z-index:5;background:#f3f6fa;padding:10px 0}
+.topbar{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#fff;padding:12px 16px;border:1px solid #e1e8f0;border-radius:12px}
+#timer{font-size:1.25rem;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+#timer.warning{color:var(--red)}
+.progress-shell{height:9px;background:#dce5ef;border-radius:20px;overflow:hidden;margin-top:10px}
+#progress{height:100%;width:0;background:#2d8a67;transition:width .2s}
+.qhead{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.qnum{font-weight:800;color:var(--blue)}
+.qtype{font-size:.82rem;background:var(--pale);color:var(--blue);padding:4px 9px;border-radius:20px}
+.visual{margin:14px 0;padding:12px;background:#f7faff;border-radius:12px;text-align:center}
+.visual svg{max-width:100%;height:auto}
+.options{display:grid;gap:9px;margin-top:14px}
+.option{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1px solid #d7e0e9;border-radius:10px;cursor:pointer}
+.option:hover{background:#f7faff;border-color:#8aafd8}
+.option input{margin-top:5px;accent-color:var(--blue);transform:scale(1.12)}
+.option.selected{background:#edf5ff;border-color:#5591cb}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin:20px 0}
+#resultArea{display:none}
+.score{font-size:2.1rem;font-weight:850;color:var(--green)}
+.explanation{border-top:1px solid #e5eaf0;padding:14px 0}
+.correct{color:var(--green);font-weight:750}
+.incorrect{color:var(--red);font-weight:750}
+.small{font-size:.9rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:15px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.panel,.question,.result-card{padding:16px}.topbar{align-items:flex-start;flex-direction:column}.camera-wrap{align-items:flex-start}}
+@media print{body{background:#fff}.no-print,header .header-inner p{display:none!important}main{max-width:none;margin:0;padding:0}.panel,.question,.result-card{box-shadow:none;break-inside:avoid;border:1px solid #bbb}#resultArea{display:block!important}header{background:#fff;color:#000;padding:10px}video{display:none}}
 </style>
 </head>
 <body>
-<div id="startPage" class="container">
-  <section class="card hero">
-    <div class="badge">IPA Kelas 8 • Usaha & Energi</div>
-    <h1>Kuis Usaha dan Energi</h1>
-    <p>10 soal • hitungan & konsep • waktu 40 menit • pengerjaan individu</p>
-    <div class="badges">
-      <span class="badge">Skor otomatis</span>
-      <span class="badge">Ilustrasi soal</span>
-      <span class="badge">Pembahasan akhir</span>
-    </div>
-  </section>
-
-  <section class="card" style="margin-top:18px">
-    <h2>Identitas Murid</h2>
-    <div class="form-grid">
-      <div>
-        <label for="name">Nama lengkap</label>
-        <input id="name" type="text" placeholder="Masukkan nama lengkap">
-      </div>
-      <div>
-        <label for="className">Kelas</label>
-        <input id="className" type="text" placeholder="Contoh: 8A">
-      </div>
-    </div>
-
-    <div class="instructions">
-      <strong>Petunjuk pengerjaan</strong>
-      <ul>
-        <li>Kerjakan secara individu.</li>
-        <li>Waktu pengerjaan adalah 40 menit.</li>
-        <li>Bacalah setiap soal dengan teliti dan pilih jawaban yang paling tepat.</li>
-        <li>Untuk soal hitungan, gunakan g = 10 m/s² jika nilai gravitasi tidak dicantumkan.</li>
-        <li>Setelah menekan tombol <b>Mulai Kuis</b>, waktu akan berjalan otomatis.</li>
-        <li>Pastikan semua jawaban sudah diperiksa sebelum menekan <b>Selesai & Lihat Hasil</b>.</li>
-      </ul>
-    </div>
-    <button class="btn-primary" onclick="startQuiz()">Mulai Kuis</button>
-    <p class="note">Nama dan kelas digunakan untuk menampilkan identitas pada hasil kuis.</p>
-  </section>
+<header><div class="header-inner">
+<h1>Kuis IPA Kelas 8: Usaha dan Energi</h1>
+<p>Kerjakan secara individu. Bacalah setiap soal dengan teliti sebelum memilih jawaban.</p>
+</div></header>
+<main>
+<section id="startArea" class="panel">
+<h2>Identitas Murid</h2>
+<p>Lengkapi identitas sebelum memulai kuis.</p>
+<div class="grid">
+<div><label for="studentName">Nama lengkap</label><input id="studentName" type="text" autocomplete="name" placeholder="Masukkan nama lengkap"></div>
+<div><label for="studentClass">Kelas</label><input id="studentClass" type="text" placeholder="Contoh: VIII-A"></div>
 </div>
-
-<div id="quizPage" class="hidden">
-  <div class="topbar">
-    <div class="progress-wrap">
-      <div class="timer" id="timer">40:00</div>
-      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-      <div id="progressText" class="note">0/10 terjawab</div>
-    </div>
-  </div>
-  <main class="container">
-    <section class="card">
-      <div class="quiz-header">
-        <div>
-          <span class="q-number" id="questionNumber">Soal 1</span>
-          <h2 class="q-title" id="questionText"></h2>
-        </div>
-      </div>
-      <div id="illustration" class="illustration"></div>
-      <div id="options" class="options"></div>
-      <div class="nav">
-        <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">Sebelumnya</button>
-        <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">Berikutnya</button>
-      </div>
-    </section>
-    <div style="text-align:center;margin-top:15px">
-      <button class="btn-danger" onclick="finishQuiz(false)">Selesai & Lihat Hasil</button>
-    </div>
-  </main>
+<div class="notice"><strong>Ketentuan kamera dan halaman kuis</strong><br>
+Kamera memerlukan izin dari browser dan hanya menampilkan preview selama kuis. Halaman ini tidak merekam, menyimpan, atau mengirim video. Jika halaman kuis menjadi tidak aktif/tersembunyi, pelanggaran pertama menghasilkan peringatan. Pada pelanggaran kedua, kuis otomatis dikumpulkan dan dikunci.
 </div>
-
-<div id="resultPage" class="hidden">
-  <main class="container">
-    <section class="card result">
-      <h1>Hasil Kuis</h1>
-      <p id="studentResult"></p>
-      <div class="score-circle"><strong id="scoreText">0</strong></div>
-      <h2 id="scoreMessage"></h2>
-      <p id="timeResult" class="note"></p>
-      <div class="actions">
-        <button class="btn-primary" onclick="window.print()">Cetak / Simpan PDF</button>
-        <button class="btn-secondary" onclick="location.reload()">Kerjakan Lagi</button>
-      </div>
-    </section>
-    <section class="card review">
-      <h2>Pembahasan</h2>
-      <div id="reviewList"></div>
-    </section>
-    <footer>Kuis Usaha dan Energi • IPA Kelas 8</footer>
-  </main>
+<div class="camera-wrap">
+<video id="cameraPreview" autoplay muted playsinline aria-label="Preview kamera"></video>
+<div>
+<button id="cameraButton" type="button">Aktifkan Kamera</button>
+<p id="cameraStatus" class="note">Kamera belum diaktifkan.</p>
+<p class="small">Pastikan kamera diizinkan pada pengaturan browser. Gunakan perangkat yang memiliki kamera.</p>
 </div>
+</div>
+<p id="startError" class="incorrect" role="alert"></p>
+<div class="actions"><button id="startButton" type="button" disabled>Mulai Kuis</button></div>
+<p class="note">Durasi: 40 menit · Jumlah soal: 10 · Pengerjaan individu</p>
+</section>
+
+<section id="quizArea">
+<div class="sticky no-print">
+<div class="topbar">
+<div><strong id="identityLine"></strong><div class="small" id="answeredLine">0 dari 10 soal dijawab</div></div>
+<div><div class="small">Sisa waktu</div><div id="timer">40:00</div></div>
+</div>
+<div class="progress-shell"><div id="progress"></div></div>
+</div>
+<div id="questions"></div>
+<div class="panel no-print">
+<div id="unansweredWarning" class="notice" style="display:none">Masih ada soal yang belum dijawab. Periksa kembali sebelum mengumpulkan.</div>
+<div class="actions"><button id="finishButton" type="button">Selesai &amp; Lihat Hasil</button></div>
+</div>
+</section>
+
+<section id="resultArea">
+<div class="result-card">
+<h2>Hasil Kuis</h2>
+<p id="resultIdentity"></p>
+<div class="score" id="scoreText"></div>
+<p id="scoreDetail"></p>
+<p id="submitReason" class="notice"></p>
+<p id="violationDetail" class="small"></p>
+<div class="actions no-print">
+<button id="printButton" type="button">Cetak / Simpan PDF</button>
+<button id="retryButton" class="secondary" type="button">Kembali ke Awal</button>
+</div>
+</div>
+<div class="result-card"><h2>Pembahasan Setiap Soal</h2><div id="review"></div></div>
+</section>
+</main>
+<footer>Kuis IPA Kelas 8 · Usaha dan Energi</footer>
 
 <script>
 const questions = [
-{
- id:1,
- text:"Perhatikan situasi berikut: Raka mendorong sebuah kotak dengan gaya 80 N sehingga kotak berpindah sejauh 5 m searah dengan gaya. Besar usaha yang dilakukan Raka pada kotak adalah ...",
- type:"single",
- options:["16 J","85 J","400 J","4.000 J"],
- answer:2,
- explanation:"Karena gaya searah perpindahan, W = F × s = 80 N × 5 m = 400 J.",
- hint:"Gunakan hubungan usaha dengan gaya dan perpindahan ketika keduanya searah.",
- svg:`<svg viewBox="0 0 720 210" role="img" aria-label="Kotak didorong gaya 80 N sejauh 5 meter"><line x1="60" y1="165" x2="660" y2="165" stroke="#64748b" stroke-width="5"/><rect x="285" y="105" width="120" height="60" rx="8" fill="#93c5fd" stroke="#1d4ed8" stroke-width="4"/><line x1="405" y1="135" x2="570" y2="135" stroke="#dc2626" stroke-width="5"/><polygon points="570,135 550,123 550,147" fill="#dc2626"/><text x="435" y="120" font-size="20" font-weight="bold" fill="#b91c1c">F = 80 N</text><text x="320" y="143" font-size="20" fill="#1e3a8a">kotak</text><line x1="285" y1="185" x2="405" y2="185" stroke="#0f766e" stroke-width="4"/><text x="315" y="207" font-size="18" fill="#0f766e">5 m</text></svg>`
-},
-{
- id:2,
- text:"Sebuah meja didorong dengan gaya 50 N, tetapi meja tidak berpindah karena tertahan oleh lantai. Pernyataan yang paling tepat adalah ...",
- type:"single",
- options:["Usaha pada meja sebesar 50 J","Usaha pada meja sebesar 0 J","Usaha pada meja sebesar 2.500 J","Usaha pada meja tidak dapat ditentukan"],
- answer:1,
- explanation:"Usaha mekanik bergantung pada perpindahan. Karena meja tidak berpindah (s = 0), usaha oleh gaya tersebut adalah W = 0 J.",
- hint:"Dalam usaha mekanik, perhatikan apakah benda benar-benar mengalami perpindahan."
-},
-{
- id:3,
- text:"Perhatikan ilustrasi seorang murid mengangkat tas bermassa 4 kg dari lantai ke meja setinggi 1,5 m. Jika percepatan gravitasi 10 m/s², perubahan energi potensial gravitasi tas adalah ...",
- type:"single",
- options:["6 J","40 J","60 J","600 J"],
- answer:2,
- explanation:"ΔEp = mgh = 4 × 10 × 1,5 = 60 J.",
- hint:"Energi potensial gravitasi dipengaruhi massa, gravitasi, dan perubahan ketinggian.",
- svg:`<svg viewBox="0 0 720 260" role="img" aria-label="Tas diangkat ke meja setinggi 1,5 meter"><line x1="70" y1="220" x2="650" y2="220" stroke="#64748b" stroke-width="5"/><rect x="430" y="125" width="170" height="95" fill="#cbd5e1" stroke="#475569" stroke-width="3"/><line x1="250" y1="220" x2="250" y2="125" stroke="#0f766e" stroke-width="4" stroke-dasharray="8 6"/><text x="265" y="180" font-size="20" fill="#0f766e">1,5 m</text><rect x="180" y="175" width="55" height="45" rx="8" fill="#fbbf24" stroke="#92400e" stroke-width="3"/><line x1="208" y1="165" x2="208" y2="80" stroke="#dc2626" stroke-width="5"/><polygon points="208,80 196,100 220,100" fill="#dc2626"/><text x="222" y="95" font-size="18" fill="#b91c1c">angkat</text><rect x="505" y="80" width="55" height="45" rx="8" fill="#fbbf24" stroke="#92400e" stroke-width="3"/><text x="425" y="55" font-size="18" fill="#334155">m = 4 kg</text></svg>`
-},
-{
- id:4,
- text:"Sebuah benda yang bergerak lebih cepat memiliki energi kinetik yang lebih besar daripada benda sejenis yang bergerak lebih lambat, jika massanya sama.",
- type:"tf",
- options:["Benar","Salah"],
- answer:0,
- explanation:"Benar. Energi kinetik dirumuskan Ek = ½mv². Pada massa yang sama, peningkatan kecepatan menyebabkan energi kinetik meningkat.",
- hint:"Perhatikan pengaruh kecepatan dalam energi gerak benda."
-},
-{
- id:5,
- text:"Sebuah bola bermassa 2 kg bergerak dengan kecepatan 10 m/s. Energi kinetik bola tersebut adalah ...",
- type:"single",
- options:["20 J","50 J","100 J","200 J"],
- answer:2,
- explanation:"Ek = ½mv² = ½ × 2 × 10² = 100 J.",
- hint:"Kecepatan pada energi kinetik harus diperhatikan dengan pangkat dua.",
- svg:`<svg viewBox="0 0 720 200" role="img" aria-label="Bola bermassa 2 kilogram bergerak dengan kecepatan 10 meter per sekon"><line x1="70" y1="145" x2="650" y2="145" stroke="#64748b" stroke-width="4"/><circle cx="270" cy="105" r="35" fill="#60a5fa" stroke="#1d4ed8" stroke-width="4"/><text x="247" y="112" font-size="18" fill="#fff">bola</text><line x1="310" y1="105" x2="520" y2="105" stroke="#dc2626" stroke-width="5"/><polygon points="520,105 500,93 500,117" fill="#dc2626"/><text x="355" y="88" font-size="20" fill="#b91c1c">v = 10 m/s</text><text x="245" y="180" font-size="18" fill="#334155">m = 2 kg</text></svg>`
-},
-{
- id:6,
- text:"Perhatikan sebuah benda yang meluncur dari posisi A yang lebih tinggi menuju posisi B yang lebih rendah pada lintasan licin. Jika gesekan diabaikan, perubahan energi yang paling tepat adalah ...",
- type:"single",
- options:["Energi potensial berkurang dan energi kinetik bertambah","Energi potensial bertambah dan energi kinetik berkurang","Energi potensial dan energi kinetik sama-sama berkurang","Energi potensial dan energi kinetik sama-sama bertambah"],
- answer:0,
- explanation:"Saat benda turun, energi potensial gravitasi berkurang dan berubah menjadi energi kinetik. Karena gesekan diabaikan, energi mekanik tetap.",
- hint:"Bandingkan ketinggian benda di A dan B serta perubahan kecepatannya.",
- svg:`<svg viewBox="0 0 720 260" role="img" aria-label="Lintasan benda dari posisi A tinggi ke posisi B rendah"><path d="M100 70 C260 70 300 190 600 190" fill="none" stroke="#475569" stroke-width="8"/><circle cx="150" cy="70" r="18" fill="#2563eb"/><circle cx="570" cy="190" r="18" fill="#2563eb"/><text x="130" y="45" font-size="22" font-weight="bold">A</text><text x="555" y="225" font-size="22" font-weight="bold">B</text><line x1="150" y1="70" x2="150" y2="190" stroke="#0f766e" stroke-width="3" stroke-dasharray="7 6"/><text x="165" y="135" font-size="18" fill="#0f766e">lebih tinggi</text><line x1="205" y1="83" x2="510" y2="176" stroke="#dc2626" stroke-width="5"/><polygon points="510,176 490,165 495,188" fill="#dc2626"/></svg>`
-},
-{
- id:7,
- text:"Ketika sebuah benda jatuh bebas dan hambatan udara diabaikan, jumlah energi mekaniknya tetap selama benda bergerak.",
- type:"tf",
- options:["Benar","Salah"],
- answer:0,
- explanation:"Benar. Tanpa hambatan udara atau gaya nonkonservatif yang mengubah energi mekanik, energi potensial dan energi kinetik dapat berubah bentuk tetapi jumlahnya tetap.",
- hint:"Pikirkan apakah energi hanya berubah bentuk atau benar-benar hilang dari sistem."
-},
-{
- id:8,
- text:"Sebuah mesin melakukan usaha sebesar 6.000 J dalam waktu 20 sekon. Daya mesin tersebut adalah ...",
- type:"single",
- options:["30 W","300 W","3.000 W","120.000 W"],
- answer:1,
- explanation:"Daya P = W/t = 6.000 J ÷ 20 s = 300 W.",
- hint:"Daya menunjukkan seberapa cepat suatu usaha dilakukan.",
- svg:`<svg viewBox="0 0 720 220" role="img" aria-label="Mesin melakukan usaha dalam waktu tertentu"><rect x="250" y="70" width="180" height="95" rx="15" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="4"/><circle cx="340" cy="118" r="27" fill="#fff" stroke="#1d4ed8" stroke-width="4"/><path d="M330 118 l10 -18 l10 18 l-10 18z" fill="#2563eb"/><line x1="430" y1="118" x2="570" y2="118" stroke="#dc2626" stroke-width="5"/><polygon points="570,118 550,106 550,130" fill="#dc2626"/><text x="275" y="55" font-size="19" fill="#334155">W = 6.000 J</text><text x="290" y="195" font-size="19" fill="#334155">t = 20 s</text></svg>`
-},
-{
- id:9,
- text:"Perhatikan beberapa kegiatan berikut. Pilih semua kegiatan yang menunjukkan adanya perubahan bentuk energi yang berkaitan dengan usaha atau gerak.",
- type:"multi",
- options:["Mendorong sepeda hingga bergerak","Buah jatuh dari pohon","Buku diam di atas meja","Anak mengayuh sepeda hingga semakin cepat"],
- answer:[0,1,3],
- explanation:"Mendorong sepeda dan mengayuh sepeda melibatkan usaha yang menghasilkan perubahan gerak. Buah yang jatuh mengalami perubahan energi potensial gravitasi menjadi energi kinetik. Buku yang diam tidak menunjukkan perubahan energi akibat gerak.",
- hint:"Cari kegiatan yang melibatkan perpindahan, perubahan kecepatan, atau perubahan bentuk energi."
-},
-{
- id:10,
- text:"Sebuah benda bermassa 2 kg berada pada ketinggian 5 m dan bergerak dengan kecepatan 10 m/s. Jika g = 10 m/s² dan hambatan udara diabaikan, energi mekanik benda adalah ...",
- type:"single",
- options:["100 J","200 J","300 J","400 J"],
- answer:1,
- explanation:"Ep = mgh = 2 × 10 × 5 = 100 J. Ek = ½mv² = ½ × 2 × 10² = 100 J. Jadi energi mekanik = Ep + Ek = 200 J.",
- hint:"Energi mekanik adalah gabungan energi karena posisi dan energi karena gerak.",
- svg:`<svg viewBox="0 0 720 280" role="img" aria-label="Benda bermassa 2 kilogram pada ketinggian 5 meter dan bergerak 10 meter per sekon"><line x1="70" y1="240" x2="650" y2="240" stroke="#64748b" stroke-width="5"/><line x1="180" y1="240" x2="180" y2="70" stroke="#0f766e" stroke-width="4"/><rect x="150" y="50" width="60" height="45" rx="7" fill="#60a5fa" stroke="#1d4ed8" stroke-width="4"/><text x="115" y="30" font-size="18" fill="#334155">m = 2 kg</text><text x="190" y="160" font-size="18" fill="#0f766e">5 m</text><line x1="220" y1="72" x2="450" y2="72" stroke="#dc2626" stroke-width="5"/><polygon points="450,72 430,60 430,84" fill="#dc2626"/><text x="265" y="50" font-size="18" fill="#b91c1c">v = 10 m/s</text><text x="470" y="235" font-size="18" fill="#334155">lantai</text></svg>`
-}
+ {type:"Pilihan ganda · Hitungan",text:"Seorang murid mendorong sebuah kotak dengan gaya 80 N hingga kotak berpindah sejauh 5 m searah gaya. Berapakah usaha yang dilakukan pada kotak?",visual:"push",options:["400 J","160 J","85 J","16 J"],answer:0,explain:"Usaha dihitung dengan W = F × s jika gaya searah perpindahan. W = 80 N × 5 m = 400 J."},
+ {type:"Pilihan ganda · Konsep",text:"Sebuah buku didorong dengan gaya, tetapi buku tersebut tetap diam di atas meja. Berapakah usaha yang dilakukan gaya dorong pada buku?",visual:"book",options:["Usaha bernilai maksimum","Usaha sama dengan gaya dikali waktu","Usaha sama dengan nol karena tidak ada perpindahan","Usaha bernilai negatif karena buku diam"],answer:2,explain:"Dalam fisika, usaha oleh gaya pada benda bergantung pada perpindahan searah komponen gaya. Karena buku tidak berpindah, usaha oleh gaya dorong adalah 0 J."},
+ {type:"Pilihan ganda · Hitungan",text:"Sebuah pot tanaman bermassa 4 kg diletakkan pada rak setinggi 1,5 m dari lantai. Jika percepatan gravitasi 10 m/s², berapakah energi potensial gravitasi pot terhadap lantai?",visual:"pot",options:["60 J","40 J","15 J","6 J"],answer:0,explain:"Energi potensial gravitasi Ep = m × g × h = 4 × 10 × 1,5 = 60 J."},
+ {type:"Benar atau salah",text:"Dua benda memiliki massa yang sama. Benda yang bergerak dengan kelajuan lebih besar memiliki energi kinetik lebih besar.",options:["Benar","Salah"],answer:0,explain:"Pernyataan benar. Energi kinetik Ek = ½mv². Untuk massa yang sama, semakin besar kelajuan, semakin besar energi kinetiknya."},
+ {type:"Pilihan ganda · Hitungan",text:"Bola bermassa 2 kg bergerak dengan kelajuan 10 m/s. Berapakah energi kinetik bola?",visual:"ball",options:["100 J","20 J","50 J","200 J"],answer:0,explain:"Ek = ½ × m × v² = ½ × 2 × 10² = 100 J."},
+ {type:"Pilihan ganda · Analisis gambar",text:"Sebuah kereta mainan meluncur menuruni lintasan licin dari titik A ke titik B. Abaikan gesekan dan hambatan udara. Perubahan energi yang paling tepat adalah ...",visual:"track",options:["Energi potensial berkurang dan energi kinetik bertambah","Energi potensial dan kinetik sama-sama bertambah","Energi kinetik berkurang dan energi potensial bertambah","Energi mekanik seluruhnya berubah menjadi kalor"],answer:0,explain:"Saat kereta turun, ketinggian berkurang sehingga energi potensial gravitasi menurun. Kelajuan bertambah sehingga energi kinetik meningkat. Tanpa gesekan, energi mekanik total tetap."},
+ {type:"Benar atau salah",text:"Pada benda yang jatuh bebas tanpa hambatan udara, jumlah energi potensial dan energi kinetiknya tetap.",options:["Benar","Salah"],answer:0,explain:"Pernyataan benar. Energi mekanik (Ep + Ek) kekal jika hanya gaya gravitasi yang melakukan usaha dan hambatan udara diabaikan."},
+ {type:"Pilihan ganda · Hitungan",text:"Sebuah mesin melakukan usaha sebesar 6.000 J selama 20 sekon. Berapakah daya rata-rata mesin tersebut?",options:["300 W","120 W","3.000 W","30 W"],answer:0,explain:"Daya P = W/t = 6.000 J ÷ 20 s = 300 W."},
+ {type:"Pilihan ganda · Pilih semua yang benar",text:"Perhatikan beberapa peristiwa berikut. Manakah yang menunjukkan adanya usaha dalam pengertian fisika? Pilih semua jawaban yang benar.",visual:"events",options:["Mendorong sepeda hingga bergerak maju","Buah jatuh dari pohon","Buku diam di atas meja","Mengayuh sepeda sehingga sepeda bergerak lebih cepat"],answer:[0,1,3],multi:true,explain:"A, B, dan D benar karena terdapat gaya yang menyebabkan perpindahan dengan komponen searah gaya. Buku yang diam tidak mengalami perpindahan, sehingga usaha pada buku oleh gaya penopang maupun beratnya bernilai nol."},
+ {type:"Pilihan ganda · Hitungan",text:"Sebuah benda bermassa 2 kg berada pada ketinggian 5 m dan bergerak dengan kelajuan 10 m/s. Jika g = 10 m/s², berapakah energi mekanik total benda saat itu?",visual:"energy",options:["200 J","100 J","150 J","250 J"],answer:0,explain:"Ep = mgh = 2 × 10 × 5 = 100 J. Ek = ½mv² = ½ × 2 × 10² = 100 J. Energi mekanik Em = Ep + Ek = 200 J."}
 ];
 
-let current=0, answers=Array(questions.length).fill(null), seconds=2400, timerId=null, startedAt=null;
-
-function startQuiz(){
- const name=document.getElementById('name').value.trim();
- const cls=document.getElementById('className').value.trim();
- if(!name || !cls){alert("Silakan isi nama lengkap dan kelas terlebih dahulu.");return;}
- document.getElementById('startPage').classList.add('hidden');
- document.getElementById('quizPage').classList.remove('hidden');
- startedAt=Date.now(); renderQuestion(); startTimer();
+const $ = id => document.getElementById(id);
+let cameraStream=null, timeLeft=40*60, timerId=null, violationCount=0, submitted=false, shuffledQuestions=[], answers={}, questionNodes=[];
+function shuffle(array){const a=array.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function svg(kind){
+ const common='xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 170" role="img"';
+ const wrap=s=>`<svg ${common}>${s}</svg>`;
+ if(kind==="push")return wrap('<rect x="40" y="125" width="480" height="3" fill="#64748b"/><rect x="235" y="72" width="100" height="53" rx="8" fill="#80b6e8" stroke="#2463a6" stroke-width="3"/><path d="M100 98 H220 M205 83 L220 98 L205 113" stroke="#b42318" stroke-width="5" fill="none"/><text x="110" y="75" font-size="17" fill="#203040">F = 80 N</text><text x="280" y="151" text-anchor="middle" font-size="16" fill="#203040">Perpindahan 5 m</text>');
+ if(kind==="book")return wrap('<rect x="120" y="112" width="320" height="12" fill="#94a3b8"/><rect x="235" y="65" width="90" height="45" rx="4" fill="#e5a94f" stroke="#9a641b" stroke-width="3"/><path d="M180 86 H225 M212 73 L225 86 L212 99" stroke="#2463a6" stroke-width="4" fill="none"/><text x="280" y="45" text-anchor="middle" font-size="17" fill="#203040">Buku tetap diam</text>');
+ if(kind==="pot")return wrap('<rect x="95" y="135" width="370" height="5" fill="#64748b"/><rect x="205" y="70" width="150" height="7" fill="#64748b"/><path d="M260 60 Q280 25 300 60" stroke="#16835d" stroke-width="6" fill="none"/><path d="M260 58 Q240 37 230 52 M300 58 Q320 37 330 52" stroke="#16835d" stroke-width="6" fill="none"/><path d="M258 62 L302 62 L296 91 Q280 101 264 91 Z" fill="#c87943"/><path d="M280 105 V132 M273 120 L280 127 L287 120" stroke="#b42318" stroke-width="3" fill="none"/><text x="320" y="30" font-size="16" fill="#203040">h = 1,5 m</text>');
+ if(kind==="ball")return wrap('<circle cx="280" cy="83" r="34" fill="#f0a34a" stroke="#9a641b" stroke-width="3"/><path d="M250 65 Q280 95 310 65 M250 100 Q280 70 310 100" stroke="#fff" stroke-width="3" fill="none"/><path d="M280 125 V150 M273 142 L280 150 L287 142" stroke="#2463a6" stroke-width="3" fill="none"/><text x="280" y="25" text-anchor="middle" font-size="17" fill="#203040">m = 2 kg · v = 10 m/s</text>');
+ if(kind==="track")return wrap('<path d="M55 35 Q170 35 240 95 T505 135" stroke="#64748b" stroke-width="8" fill="none"/><circle cx="105" cy="35" r="13" fill="#e5a94f" stroke="#9a641b" stroke-width="2"/><circle cx="420" cy="124" r="13" fill="#e5a94f" stroke="#9a641b" stroke-width="2"/><text x="95" y="18" font-size="17" fill="#203040">A</text><text x="440" y="116" font-size="17" fill="#203040">B</text><path d="M260 78 L295 91 M285 77 L295 91 L278 96" stroke="#16835d" stroke-width="4" fill="none"/><text x="280" y="158" text-anchor="middle" font-size="15" fill="#203040">Lintasan licin</text>');
+ if(kind==="events")return wrap('<g font-size="16" fill="#203040" text-anchor="middle"><rect x="12" y="25" width="125" height="105" rx="10" fill="#eaf3fc"/><rect x="153" y="25" width="125" height="105" rx="10" fill="#eaf3fc"/><rect x="294" y="25" width="125" height="105" rx="10" fill="#eaf3fc"/><rect x="435" y="25" width="113" height="105" rx="10" fill="#eaf3fc"/><text x="74" y="68">Dorong</text><text x="74" y="91">sepeda</text><text x="215" y="68">Buah</text><text x="215" y="91">jatuh</text><text x="356" y="68">Buku</text><text x="356" y="91">diam</text><text x="491" y="68">Kayuh</text><text x="491" y="91">sepeda</text></g>');
+ if(kind==="energy")return wrap('<path d="M110 130 H450" stroke="#64748b" stroke-width="4"/><rect x="220" y="105" width="65" height="25" rx="5" fill="#80b6e8" stroke="#2463a6" stroke-width="2"/><path d="M252 105 V28 M245 38 L252 28 L259 38" stroke="#16835d" stroke-width="3" fill="none"/><text x="275" y="23" font-size="17" fill="#203040">h = 5 m</text><text x="320" y="91" font-size="16" fill="#203040">v = 10 m/s</text>');
+ return "";
 }
-function startTimer(){
- updateTimer();
- timerId=setInterval(()=>{
-   seconds--; updateTimer();
-   if(seconds<=0){clearInterval(timerId); alert("Waktu 40 menit telah habis. Jawaban akan dikumpulkan otomatis."); finishQuiz(true);}
- },1000);
-}
-function updateTimer(){
- const m=Math.floor(seconds/60), s=seconds%60;
- const el=document.getElementById('timer');
- el.textContent=`${m}:${String(s).padStart(2,'0')}`;
- el.classList.toggle('warning',seconds<=600 && seconds>120);
- el.classList.toggle('danger',seconds<=120);
-}
-function renderQuestion(){
- const q=questions[current];
- document.getElementById('questionNumber').textContent=`Soal ${current+1}`;
- document.getElementById('questionText').textContent=q.text;
- const ill=document.getElementById('illustration');
- ill.innerHTML=q.svg ? q.svg+'<div class="caption">Ilustrasi untuk membantu memahami situasi soal.</div>' : '';
- ill.style.display=q.svg?'block':'none';
- const opt=document.getElementById('options'); opt.innerHTML='';
- q.options.forEach((label,i)=>{
-   const div=document.createElement('label'); div.className='option';
-   if(Array.isArray(answers[current]) ? answers[current].includes(i) : answers[current]===i) div.classList.add('selected');
-   const input=document.createElement('input');
-   input.type=q.type==='multi'?'checkbox':'radio'; input.name='q'+q.id; input.value=i;
-   input.checked=Array.isArray(answers[current]) ? answers[current].includes(i) : answers[current]===i;
-   input.addEventListener('change',()=>selectAnswer(i));
-   const span=document.createElement('span'); span.className='option-label'; span.textContent=String.fromCharCode(65+i)+'. '+label;
-   div.append(input,span); opt.appendChild(div);
+function renderQuestions(){
+ const root=$("questions");root.innerHTML="";questionNodes=[];
+ shuffledQuestions=questions.map((q,idx)=>({...q,originalIndex:idx,displayOptions:shuffle(q.options.map((text,i)=>({text,index:i})))}));
+ shuffledQuestions.forEach((q,displayIdx)=>{
+  const card=document.createElement("article");card.className="question";card.id="q"+displayIdx;
+  const visual=q.visual?`<div class="visual">${svg(q.visual)}</div>`:"";
+  card.innerHTML=`<div class="qhead"><span class="qnum">Soal ${displayIdx+1}</span><span class="qtype">${q.type}</span></div><p>${q.text}</p>${visual}<div class="options" id="opts${displayIdx}"></div>`;
+  const opts=card.querySelector(".options");
+  q.displayOptions.forEach(opt=>{
+   const lab=document.createElement("label");lab.className="option";
+   const type=q.multi?"checkbox":"radio";
+   lab.innerHTML=`<input type="${type}" name="q${displayIdx}" value="${opt.index}"><span>${String.fromCharCode(65+q.displayOptions.findIndex(x=>x.index===opt.index))}. ${opt.text}</span>`;
+   const input=lab.querySelector("input");
+   input.addEventListener("change",()=>{if(submitted)return;lab.classList.toggle("selected",input.checked);saveAnswer(displayIdx);});
+   opts.appendChild(lab);
+  });
+  root.appendChild(card);questionNodes.push(card);
  });
- document.getElementById('prevBtn').disabled=current===0;
- document.getElementById('nextBtn').textContent=current===questions.length-1?'Periksa Jawaban':'Berikutnya';
+}
+function saveAnswer(i){
+ const q=shuffledQuestions[i],inputs=[...document.querySelectorAll(`input[name="q${i}"]`)];
+ const chosen=inputs.filter(x=>x.checked).map(x=>Number(x.value));
+ answers[i]=q.multi?chosen:(chosen.length?chosen[0]:null);
  updateProgress();
 }
-function selectAnswer(i){
- const q=questions[current];
- if(q.type==='multi'){
-   if(!Array.isArray(answers[current])) answers[current]=[];
-   if(answers[current].includes(i)) answers[current]=answers[current].filter(x=>x!==i);
-   else answers[current].push(i);
- }else answers[current]=i;
- renderQuestion();
-}
-function nextQuestion(){
- if(current<questions.length-1){current++;renderQuestion();}
- else finishQuiz(false);
-}
-function prevQuestion(){if(current>0){current--;renderQuestion();}}
 function updateProgress(){
- const count=answers.filter(a=>a!==null && (!Array.isArray(a)||a.length)).length;
- document.getElementById('progressText').textContent=`${count}/10 terjawab`;
- document.getElementById('progressBar').style.width=`${count/10*100}%`;
+ const count=Object.values(answers).filter(v=>Array.isArray(v)?v.length>0:v!==null&&v!==undefined).length;
+ $("answeredLine").textContent=`${count} dari 10 soal dijawab`;
+ $("progress").style.width=(count*10)+"%";
+ $("unansweredWarning").style.display=count<10?"block":"none";
 }
-function sameAnswer(a,b){
- if(Array.isArray(a) && Array.isArray(b)) return a.slice().sort().join(',')===b.slice().sort().join(',');
- return a===b;
+async function activateCamera(){
+ $("cameraButton").disabled=true;$("cameraStatus").textContent="Meminta izin kamera...";
+ try{
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("Browser atau koneksi halaman tidak mendukung akses kamera. Gunakan browser terbaru melalui HTTPS atau localhost.");
+  cameraStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});
+  $("cameraPreview").srcObject=cameraStream;
+  $("cameraStatus").textContent="Kamera aktif. Preview ditampilkan; video tidak direkam atau disimpan.";
+  $("cameraStatus").className="status";$("startButton").disabled=false;
+  cameraStream.getVideoTracks()[0].addEventListener("ended",()=>{if(!submitted&&$("quizArea").style.display==="block"){alert("Kamera terputus. Pastikan kamera tetap aktif selama kuis.");}});
+ }catch(err){$("cameraStatus").textContent="Kamera belum aktif: "+err.message;$("cameraStatus").className="incorrect";$("cameraButton").disabled=false;}
 }
-function finishQuiz(auto){
- if(!auto){
-   const unanswered=answers.filter(a=>a===null || (Array.isArray(a)&&a.length===0)).length;
-   if(unanswered>0 && !confirm(`Masih ada ${unanswered} soal yang belum dijawab. Tetap kumpulkan?`)) return;
+function startQuiz(){
+ const name=$("studentName").value.trim(),klass=$("studentClass").value.trim();
+ if(!name||!klass){$("startError").textContent="Nama dan kelas wajib diisi.";return;}
+ if(!cameraStream||cameraStream.getVideoTracks()[0].readyState!=="live"){$("startError").textContent="Aktifkan kamera dan berikan izin sebelum memulai kuis.";return;}
+ $("startError").textContent="";$("identityLine").textContent=`${name} · ${klass}`;
+ $("startArea").style.display="none";$("quizArea").style.display="block";
+ renderQuestions();updateProgress();timeLeft=40*60;violationCount=0;submitted=false;
+ timerId=setInterval(tick,1000);
+ document.addEventListener("visibilitychange",onVisibilityChange);
+}
+function tick(){
+ if(submitted)return;timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;
+ $("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+ if(timeLeft<=300)$("timer").classList.add("warning");
+ if(timeLeft<=0)finishQuiz("Waktu pengerjaan 40 menit telah habis.");
+}
+function onVisibilityChange(){
+ if(document.hidden&&!submitted){
+  violationCount++;
+  if(violationCount===1){alert("Peringatan 1 dari 2: Anda meninggalkan halaman kuis. Jika halaman ditinggalkan sekali lagi, kuis akan otomatis dikumpulkan dan dikunci.");}
+  else finishQuiz("Kuis dikumpulkan otomatis karena halaman kuis ditinggalkan 2 kali.");
  }
- clearInterval(timerId);
- let score=0;
- questions.forEach((q,i)=>{if(sameAnswer(answers[i],q.answer)) score++;});
- const pct=Math.round(score/questions.length*100);
- document.getElementById('quizPage').classList.add('hidden');
- document.getElementById('resultPage').classList.remove('hidden');
- document.getElementById('scoreText').textContent=`${pct}`;
- document.getElementById('studentResult').textContent=`Nama: ${document.getElementById('name').value} • Kelas: ${document.getElementById('className').value}`;
- document.getElementById('timeResult').textContent=`Waktu tersisa: ${Math.floor(seconds/60)} menit ${seconds%60} detik`;
- document.getElementById('scoreMessage').textContent=pct>=85?'Sangat baik!':pct>=70?'Baik, terus pertahankan!':pct>=60?'Cukup baik, masih ada bagian yang perlu diperkuat.':'Mari pelajari kembali konsep usaha dan energi.';
- const review=document.getElementById('reviewList'); review.innerHTML='';
- questions.forEach((q,i)=>{
-   const div=document.createElement('div');
-   const correct=sameAnswer(answers[i],q.answer);
-   div.className='review-item '+(correct?'correct':'incorrect');
-   const your = answers[i]===null ? 'Tidak dijawab' : Array.isArray(answers[i]) ? answers[i].map(x=>String.fromCharCode(65+x)+'. '+q.options[x]).join(', ') : String.fromCharCode(65+answers[i])+'. '+q.options[answers[i]];
-   const key = Array.isArray(q.answer) ? q.answer.map(x=>String.fromCharCode(65+x)+'. '+q.options[x]).join(', ') : String.fromCharCode(65+q.answer)+'. '+q.options[q.answer];
-   div.innerHTML=`<b>Soal ${i+1}</b><div class="answer">Jawaban Anda: ${your}</div><div class="answer">Jawaban benar: ${key}</div><div class="explanation"><b>Pembahasan:</b> ${q.explanation}</div>`;
-   review.appendChild(div);
- });
- window.scrollTo(0,0);
 }
+function finishQuiz(reason){
+ if(submitted)return;
+ const unanswered=questions.length-Object.values(answers).filter(v=>Array.isArray(v)?v.length>0:v!==null&&v!==undefined).length;
+ if(reason===undefined&&unanswered>0){
+  const ok=confirm(`Masih ada ${unanswered} soal yang belum dijawab. Apakah Anda yakin ingin mengumpulkan kuis?`);
+  if(!ok)return;
+  reason="Dikumpulkan oleh murid melalui tombol Selesai & Lihat Hasil.";
+ }else if(reason===undefined)reason="Dikumpulkan oleh murid melalui tombol Selesai & Lihat Hasil.";
+ submitted=true;clearInterval(timerId);document.removeEventListener("visibilitychange",onVisibilityChange);
+ $("quizArea").style.display="none";$("resultArea").style.display="block";
+ let score=0;const review=$("review");review.innerHTML="";
+ shuffledQuestions.forEach((q,i)=>{
+  const given=answers[i];let correct=false;
+  if(q.multi){const a=(given||[]).slice().sort((x,y)=>x-y),b=q.answer.slice().sort((x,y)=>x-y);correct=a.length===b.length&&a.every((v,j)=>v===b[j]);}
+  else correct=given===q.answer;
+  if(correct)score++;
+  const chosenText=q.multi?(given||[]).map(v=>q.options[v]).join("; "):(given===null||given===undefined?"Belum dijawab":q.options[given]);
+  const correctText=q.multi?q.answer.map(v=>q.options[v]).join("; "):q.options[q.answer];
+  const item=document.createElement("div");item.className="explanation";
+  item.innerHTML=`<strong>Soal ${i+1}</strong> — <span class="${correct?"correct":"incorrect"}">${correct?"Benar":"Belum tepat"}</span><p>${q.text}</p><p><b>Jawaban Anda:</b> ${escapeHtml(chosenText||"Belum dijawab")}</p><p><b>Jawaban benar:</b> ${escapeHtml(correctText)}</p><p><b>Pembahasan:</b> ${q.explain}</p>`;
+  review.appendChild(item);
+ });
+ $("resultIdentity").textContent=`Nama: ${$("studentName").value.trim()} | Kelas: ${$("studentClass").value.trim()}`;
+ $("scoreText").textContent=`${score*10}/100`;
+ $("scoreDetail").textContent=`Jawaban benar: ${score} dari 10 soal.`;
+ $("submitReason").textContent=reason;
+ $("violationDetail").textContent=`Jumlah terdeteksi meninggalkan halaman: ${violationCount} kali.`;
+ if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
+ $("cameraPreview").srcObject=null;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+$("cameraButton").addEventListener("click",activateCamera);
+$("startButton").addEventListener("click",startQuiz);
+$("finishButton").addEventListener("click",()=>finishQuiz());
+$("printButton").addEventListener("click",()=>window.print());
+$("retryButton").addEventListener("click",()=>location.reload());
 </script>
 </body>
 </html>
