@@ -108,6 +108,9 @@ Kamera memerlukan izin dari browser dan hanya menampilkan preview selama kuis. H
 <div class="score" id="scoreText"></div>
 <p id="scoreDetail"></p>
 <p id="submitReason" class="notice"></p>
+ <p id="saveStatus" class="notice">
+  Menyiapkan pengiriman nilai...
+</p>
 <p id="violationDetail" class="small"></p>
 <div class="actions no-print">
 <button id="printButton" type="button">Cetak / Simpan PDF</button>
@@ -120,7 +123,8 @@ Kamera memerlukan izin dari browser dan hanya menampilkan preview selama kuis. H
 <footer>Kuis IPA Kelas 8 · Usaha dan Energi</footer>
 
 <script>
-const questions = [
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbKVW0tsTGMtEQgQLSI3jJ3L5aPSWaYU3ZMXZq-toCzzT1nkYamqkpV8FINdIN655DMA/exec";
+ const questions = [
  {type:"Pilihan ganda · Hitungan",text:"Seorang murid mendorong sebuah kotak dengan gaya 80 N hingga kotak berpindah sejauh 5 m searah gaya. Berapakah usaha yang dilakukan pada kotak?",visual:"push",options:["400 J","160 J","85 J","16 J"],answer:0,explain:"Usaha dihitung dengan W = F × s jika gaya searah perpindahan. W = 80 N × 5 m = 400 J."},
  {type:"Pilihan ganda · Konsep",text:"Sebuah buku didorong dengan gaya, tetapi buku tersebut tetap diam di atas meja. Berapakah usaha yang dilakukan gaya dorong pada buku?",visual:"book",options:["Usaha bernilai maksimum","Usaha sama dengan gaya dikali waktu","Usaha sama dengan nol karena tidak ada perpindahan","Usaha bernilai negatif karena buku diam"],answer:2,explain:"Dalam fisika, usaha oleh gaya pada benda bergantung pada perpindahan searah komponen gaya. Karena buku tidak berpindah, usaha oleh gaya dorong adalah 0 J."},
  {type:"Pilihan ganda · Hitungan",text:"Sebuah pot tanaman bermassa 4 kg diletakkan pada rak setinggi 1,5 m dari lantai. Jika percepatan gravitasi 10 m/s², berapakah energi potensial gravitasi pot terhadap lantai?",visual:"pot",options:["60 J","40 J","15 J","6 J"],answer:0,explain:"Energi potensial gravitasi Ep = m × g × h = 4 × 10 × 1,5 = 60 J."},
@@ -238,12 +242,42 @@ function finishQuiz(reason){
  $("resultIdentity").textContent=`Nama: ${$("studentName").value.trim()} | Kelas: ${$("studentClass").value.trim()}`;
  $("scoreText").textContent=`${score*10}/100`;
  $("scoreDetail").textContent=`Jawaban benar: ${score} dari 10 soal.`;
+ sendResultToSheets(score);
  $("submitReason").textContent=reason;
  $("violationDetail").textContent=`Jumlah terdeteksi meninggalkan halaman: ${violationCount} kali.`;
  if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
  $("cameraPreview").srcObject=null;
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function sendResultToSheets(score) {
+  const benar = score;
+  const salah = questions.length - score;
+
+  const data = {
+    nama: $("studentName").value.trim(),
+    kelas: $("studentClass").value.trim(),
+    nilai: score * 10,
+    benar: benar,
+    salah: salah
+  };
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(data)
+    });
+
+    $("saveStatus").textContent =
+      "Data nilai telah dikirim. Silakan periksa rekap Google Sheets.";
+  } catch (error) {
+    $("saveStatus").textContent =
+      "Pengiriman nilai gagal. Silakan hubungi guru.";
+    console.error("Gagal mengirim nilai:", error);
+  }
+ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 $("cameraButton").addEventListener("click",activateCamera);
 $("startButton").addEventListener("click",startQuiz);
 $("finishButton").addEventListener("click",()=>finishQuiz());
